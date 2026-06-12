@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account – NexaHost</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css">
+<style>
+body { display:flex; min-height:100vh; align-items:center; justify-content:center; padding:60px 20px; }
+.signup-wrap { max-width: 560px; width: 100%; }
+.signup-logo { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; background:linear-gradient(135deg,var(--accent2),var(--teal)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:32px; text-align:center; display:block; }
+.signup-card { background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius-xl); padding:48px; box-shadow:var(--shadow); }
+.plan-options { display:flex; flex-direction:column; gap:10px; margin-bottom:24px; }
+.plan-option {
+  display:flex; align-items:center; gap:14px;
+  padding:14px 16px;
+  border:1px solid var(--border2);
+  border-radius:var(--radius);
+  cursor:pointer;
+  transition:.2s;
+}
+.plan-option:hover { border-color:var(--border3); background:var(--surface2); }
+.plan-option.selected { border-color:var(--accent); background:rgba(124,92,252,.1); }
+.plan-option input { accent-color:var(--accent); width:16px; height:16px; cursor:pointer; }
+.plan-option-info { flex:1; }
+.plan-option-name  { font-weight:600; font-size:15px; }
+.plan-option-desc  { font-size:12px; color:var(--text3); margin-top:2px; }
+.plan-option-price { font-family:'Syne',sans-serif; font-weight:800; color:var(--accent2); font-size:16px; }
+.plan-popular { font-size:10px; background:var(--accent); color:#fff; padding:2px 8px; border-radius:4px; font-weight:700; margin-left:8px; font-family:'Syne',sans-serif; }
+.terms-note { font-size:12px; color:var(--text3); text-align:center; margin-top:16px; line-height:1.6; }
+.terms-note a { color:var(--accent2); }
+</style>
+</head>
+<body>
+<div class="signup-wrap">
+  <a href="/" class="signup-logo">NexaHost</a>
+  <div class="signup-card">
+    <h2 style="font-size:26px;font-weight:800;margin-bottom:6px;text-align:center">Start your free trial</h2>
+    <p style="font-size:14px;color:var(--text2);text-align:center;margin-bottom:32px">30 days free. No credit card required. Cancel anytime.</p>
+    <div id="errorMsg" style="display:none;background:rgba(255,79,79,.15);border:1px solid rgba(255,79,79,.4);border-radius:var(--radius);padding:12px 16px;font-size:14px;color:var(--red);margin-bottom:20px"></div>
+    <form id="signupForm" onsubmit="handleSignup(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" id="firstName" class="form-input" placeholder="Jane" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input type="text" id="lastName" class="form-input" placeholder="Doe" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" id="email" class="form-input" placeholder="you@example.com" required autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" id="password" class="form-input" placeholder="Min. 8 characters" required autocomplete="new-password" minlength="8">
+      </div>
+      <div style="margin-bottom:24px">
+        <label class="form-label">Choose Your Plan</label>
+        <div class="plan-options" id="planOptions">
+          <label class="plan-option" id="opt-starter">
+            <input type="radio" name="plan" value="starter" onchange="selectPlan('starter')">
+            <div class="plan-option-info">
+              <div class="plan-option-name">Starter – Essential</div>
+              <div class="plan-option-desc">1 website · 10 GB · 5 emails · SSL</div>
+            </div>
+            <div class="plan-option-price">$5.99<span style="font-size:11px;color:var(--text3)">/mo</span></div>
+          </label>
+          <label class="plan-option selected" id="opt-business">
+            <input type="radio" name="plan" value="business" checked onchange="selectPlan('business')">
+            <div class="plan-option-info">
+              <div class="plan-option-name">Business – Growth <span class="plan-popular">POPULAR</span></div>
+              <div class="plan-option-desc">Unlimited sites · 50 GB · unlimited emails · domain</div>
+            </div>
+            <div class="plan-option-price">$12.99<span style="font-size:11px;color:var(--text3)">/mo</span></div>
+          </label>
+          <label class="plan-option" id="opt-pro">
+            <input type="radio" name="plan" value="pro" onchange="selectPlan('pro')">
+            <div class="plan-option-info">
+              <div class="plan-option-name">Pro – Enterprise</div>
+              <div class="plan-option-desc">Unlimited · 200 GB · hourly backups · dedicated IP</div>
+            </div>
+            <div class="plan-option-price">$19.99<span style="font-size:11px;color:var(--text3)">/mo</span></div>
+          </label>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full btn-lg" id="submitBtn">Create Account &amp; Start Free Trial →</button>
+    </form>
+    <p class="terms-note">By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.<br>Your 30-day free trial starts immediately — no payment required.</p>
+    <div style="text-align:center;margin-top:20px;font-size:14px;color:var(--text2)">Already have an account? <a href="/pages/login.html" style="color:var(--accent2);font-weight:600">Sign in</a></div>
+  </div>
+</div>
+<script src="/js/main.js"></script>
+<script>
+window.API_BASE = 'http://localhost:5000/api';
+
+function selectPlan(plan) {
+  ['starter','business','pro'].forEach(p => {
+    document.getElementById('opt-'+p).classList.toggle('selected', p === plan);
+  });
+}
+
+async function handleSignup(e) {
+  e.preventDefault();
+  const btn    = document.getElementById('submitBtn');
+  const errEl  = document.getElementById('errorMsg');
+  const plan   = document.querySelector('input[name="plan"]:checked').value;
+  errEl.style.display = 'none';
+  btn.textContent = 'Creating account…';
+  btn.disabled = true;
+  try {
+    const data = await apiCall('/auth/register', 'POST', {
+      name:     document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
+      email:    document.getElementById('email').value,
+      password: document.getElementById('password').value,
+      plan
+    });
+    localStorage.setItem('nh_token', data.token);
+    localStorage.setItem('nh_user',  JSON.stringify(data.user));
+    showToast('🎉', 'Account created! Welcome to NexaHost.');
+    setTimeout(() => window.location.href = '/pages/customer-dashboard.html', 800);
+  } catch (err) {
+    errEl.textContent = err.message;
+    errEl.style.display = 'block';
+    btn.textContent = 'Create Account & Start Free Trial →';
+    btn.disabled = false;
+  }
+}
+
+// Pre-select plan from URL param
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = new URLSearchParams(window.location.search).get('plan') || sessionStorage.getItem('selected_plan');
+  if (saved && ['starter','business','pro'].includes(saved)) {
+    document.querySelector(`input[value="${saved}"]`).checked = true;
+    selectPlan(saved);
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+/* ═══ DASHBOARD EXTRA STYLES ═══ */
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.revenue-num { background: linear-gradient(135deg,var(--gold),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+@media(max-width:768px) {
+  .grid-2,.grid-3 { grid-template-columns:1fr; }
+  .grid-4 { grid-template-columns:1fr 1fr; }
+  .plan-card { flex-direction:column; }
+  .dash-content { padding:16px; }
+}

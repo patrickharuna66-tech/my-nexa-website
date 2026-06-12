@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Dashboard – NexaHost</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+<div class="dash-layout">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">NexaHost</div>
+      <div class="sidebar-role">Customer Portal</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">Overview</div>
+      <a class="sidebar-item active" onclick="loadTab('overview')">    <span class="s-icon">🏠</span> Dashboard</a>
+      <a class="sidebar-item" onclick="loadTab('websites')">           <span class="s-icon">🌐</span> My Websites</a>
+      <div class="sidebar-section">Hosting Tools</div>
+      <a class="sidebar-item" onclick="loadTab('files')">              <span class="s-icon">📁</span> File Manager</a>
+      <a class="sidebar-item" onclick="loadTab('email')">              <span class="s-icon">📧</span> Email Accounts</a>
+      <a class="sidebar-item" onclick="loadTab('databases')">          <span class="s-icon">🗄️</span> Databases</a>
+      <a class="sidebar-item" onclick="loadTab('domains')">            <span class="s-icon">🔗</span> Domains & DNS</a>
+      <div class="sidebar-section">Billing</div>
+      <a class="sidebar-item" onclick="loadTab('billing')">            <span class="s-icon">💳</span> Plan & Billing</a>
+      <a class="sidebar-item" onclick="loadTab('invoices')">           <span class="s-icon">🧾</span> Invoices</a>
+      <div class="sidebar-section">Support</div>
+      <a class="sidebar-item" onclick="loadTab('tickets')">            <span class="s-icon">🎫</span> Support Tickets <span class="sidebar-badge" id="openTicketBadge" style="display:none">!</span></a>
+      <a class="sidebar-item" onclick="loadTab('settings')">           <span class="s-icon">⚙️</span> Account Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar avatar-purple" id="sidebarAvatar">?</div>
+        <div>
+          <div class="user-name"  id="sidebarName">Loading…</div>
+          <div class="user-email" id="sidebarEmail"></div>
+        </div>
+      </div>
+      <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:14px;font-size:13px" onclick="logout()">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN ═══ -->
+  <div class="dash-main">
+    <header class="dash-header">
+      <div>
+        <div class="dash-title"  id="pageTitle">Dashboard</div>
+        <div class="dash-subtitle" id="pageSubtitle">Loading your account…</div>
+      </div>
+      <div class="dash-header-right">
+        <button class="btn btn-ghost btn-sm" onclick="window.open('https://cpanel.yourdomain.com','_blank')">Launch cPanel →</button>
+        <button class="btn btn-primary" onclick="loadTab('tickets')">💬 Support</button>
+      </div>
+    </header>
+
+    <!-- ═══ TAB CONTENT ═══ -->
+    <div class="dash-content" id="tabContent">
+      <div style="text-align:center;padding:80px;color:var(--text3)">Loading…</div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/main.js"></script>
+<script src="/js/customer-dashboard.js"></script>
+</body>
+</html>

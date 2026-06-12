@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In – NexaHost</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css">
+<style>
+body { display: flex; min-height: 100vh; align-items: center; justify-content: center; padding: 40px 20px; }
+.auth-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 920px;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.auth-left {
+  background: linear-gradient(135deg, #1a0b35, #0d1e35);
+  padding: 56px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.auth-right { padding: 56px 48px; }
+.auth-brand { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; background: linear-gradient(135deg, var(--accent2), var(--teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 32px; }
+.auth-left h2 { font-size: 32px; font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; }
+.auth-left p  { font-size: 16px; color: var(--text2); line-height: 1.7; }
+.auth-features { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+.auth-feature  { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--text2); }
+.auth-feature-icon { font-size: 18px; }
+.auth-right h2 { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
+.auth-right p  { font-size: 14px; color: var(--text2); margin-bottom: 32px; }
+.divider { position: relative; text-align: center; margin: 20px 0; }
+.divider::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--border2); }
+.divider span { position: relative; background: var(--surface); padding: 0 14px; font-size: 12px; color: var(--text3); }
+.form-toggle { text-align: center; margin-top: 20px; font-size: 14px; color: var(--text2); }
+.form-toggle a { color: var(--accent2); font-weight: 600; }
+.form-toggle a:hover { text-decoration: underline; }
+@media(max-width: 700px) {
+  .auth-wrap { grid-template-columns: 1fr; }
+  .auth-left { display: none; }
+  .auth-right { padding: 36px 28px; }
+}
+</style>
+</head>
+<body>
+<div class="auth-wrap">
+  <div class="auth-left">
+    <div>
+      <div class="auth-brand">NexaHost</div>
+      <h2>Your website deserves the best home.</h2>
+      <p>Welcome back. Log in to manage your hosting, websites, and billing — all in one place.</p>
+      <div class="auth-features">
+        <div class="auth-feature"><span class="auth-feature-icon">⚡</span> NVMe SSD — blazing fast</div>
+        <div class="auth-feature"><span class="auth-feature-icon">🔒</span> Free SSL on every plan</div>
+        <div class="auth-feature"><span class="auth-feature-icon">🎛️</span> cPanel — full control</div>
+        <div class="auth-feature"><span class="auth-feature-icon">💬</span> 24/7 expert support</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text3)">Powered by InMotion Hosting Infrastructure</div>
+  </div>
+  <div class="auth-right">
+    <h2>Welcome back</h2>
+    <p>Sign in to your NexaHost account</p>
+    <div id="errorMsg" style="display:none;background:rgba(255,79,79,.15);border:1px solid rgba(255,79,79,.4);border-radius:var(--radius);padding:12px 16px;font-size:14px;color:var(--red);margin-bottom:20px"></div>
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label class="form-label">Email address</label>
+        <input type="email" id="email" class="form-input" placeholder="you@example.com" required autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" id="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+        <div style="text-align:right;margin-top:8px"><a href="/pages/forgot-password.html" style="font-size:13px;color:var(--accent2)">Forgot password?</a></div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full btn-lg" id="submitBtn">Sign In →</button>
+    </form>
+    <div class="divider"><span>or</span></div>
+    <button class="btn btn-ghost btn-full" onclick="adminLogin()" style="justify-content:center">🔐 Admin Login</button>
+    <div class="form-toggle" style="margin-top:20px">Don't have an account? <a href="/pages/signup.html">Create one free</a></div>
+    <div class="form-toggle" style="margin-top:8px"><a href="/">← Back to homepage</a></div>
+  </div>
+</div>
+<script src="/js/main.js"></script>
+<script>
+window.API_BASE = 'http://localhost:5000/api';
+
+async function handleLogin(e) {
+  e.preventDefault();
+  const btn   = document.getElementById('submitBtn');
+  const errEl = document.getElementById('errorMsg');
+  errEl.style.display = 'none';
+  btn.textContent = 'Signing in…';
+  btn.disabled = true;
+  try {
+    const data = await apiCall('/auth/login', 'POST', {
+      email:    document.getElementById('email').value,
+      password: document.getElementById('password').value
+    });
+    localStorage.setItem('nh_token', data.token);
+    localStorage.setItem('nh_user',  JSON.stringify(data.user));
+    showToast('👋', 'Welcome back, ' + data.user.name.split(' ')[0] + '!');
+    setTimeout(() => {
+      window.location.href = data.user.role === 'admin'
+        ? '/pages/admin-dashboard.html'
+        : '/pages/customer-dashboard.html';
+    }, 600);
+  } catch (err) {
+    errEl.textContent = err.message;
+    errEl.style.display = 'block';
+    btn.textContent = 'Sign In →';
+    btn.disabled = false;
+  }
+}
+
+function adminLogin() {
+  document.getElementById('email').value    = 'admin@nexahost.com';
+  document.getElementById('password').value = 'admin123';
+  showToast('🔐', 'Admin credentials filled — click Sign In');
+}
+</script>
+</body>
+</html>

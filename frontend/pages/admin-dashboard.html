@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Console – NexaHost</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+<div class="dash-layout">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">NexaHost</div>
+      <div class="sidebar-role" style="color:var(--accent2)">Admin Console</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">Analytics</div>
+      <a class="sidebar-item active" onclick="loadTab('overview')"><span class="s-icon">📊</span> Overview</a>
+      <a class="sidebar-item" onclick="loadTab('revenue')">          <span class="s-icon">💰</span> Revenue</a>
+      <a class="sidebar-item" onclick="loadTab('analytics')">        <span class="s-icon">📈</span> Analytics</a>
+      <div class="sidebar-section">Management</div>
+      <a class="sidebar-item" onclick="loadTab('customers')">        <span class="s-icon">👥</span> Customers <span class="sidebar-badge" id="trialBadge" style="display:none"></span></a>
+      <a class="sidebar-item" onclick="loadTab('plans')">            <span class="s-icon">📦</span> Plans & Pricing</a>
+      <a class="sidebar-item" onclick="loadTab('tickets')">          <span class="s-icon">🎫</span> Support Queue <span class="sidebar-badge" id="ticketBadge" style="background:var(--red);display:none"></span></a>
+      <div class="sidebar-section">Infrastructure</div>
+      <a class="sidebar-item" onclick="loadTab('servers')">          <span class="s-icon">🖥️</span> Server Health</a>
+      <a class="sidebar-item" onclick="loadTab('domains')">          <span class="s-icon">🌐</span> All Domains</a>
+      <div class="sidebar-section">Configuration</div>
+      <a class="sidebar-item" onclick="loadTab('settings')">         <span class="s-icon">⚙️</span> Platform Config</a>
+      <a class="sidebar-item" onclick="loadTab('billing-engine')">   <span class="s-icon">💳</span> Billing Engine</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar avatar-admin">AD</div>
+        <div>
+          <div class="user-name">Admin</div>
+          <div class="user-email" id="adminEmail">admin@nexahost.com</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="btn btn-ghost btn-sm" style="flex:1;justify-content:center" onclick="window.location.href='/'">Site</button>
+        <button class="btn btn-ghost btn-sm" style="flex:1;justify-content:center" onclick="logout()">Sign Out</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN ═══ -->
+  <div class="dash-main">
+    <header class="dash-header">
+      <div>
+        <div class="dash-title"    id="pageTitle">Admin Overview</div>
+        <div class="dash-subtitle" id="pageSubtitle">Real-time business metrics and platform health</div>
+      </div>
+      <div class="dash-header-right">
+        <div style="font-size:12px;color:var(--green);background:rgba(0,224,122,.12);border:1px solid rgba(0,224,122,.25);padding:6px 14px;border-radius:8px;">● All Systems Operational</div>
+        <button class="btn btn-teal btn-sm" onclick="exportReport()">↓ Export Report</button>
+      </div>
+    </header>
+    <div class="dash-content" id="tabContent">
+      <div style="text-align:center;padding:80px;color:var(--text3)">Loading…</div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/main.js"></script>
+<script src="/js/admin-dashboard.js"></script>
+</body>
+</html>

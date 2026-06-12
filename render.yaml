@@ -1,0 +1,42 @@
+services:
+  - type: web
+    name: nexahost-api
+    env: node
+    region: oregon
+    plan: starter
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_HOST
+        fromDatabase:
+          name: nexahost-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: nexahost-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: nexahost-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: nexahost-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: nexahost-db
+          property: password
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false
+
+databases:
+  - name: nexahost-db
+    databaseName: nexahost
+    user: nexahost_user
+    plan: starter
