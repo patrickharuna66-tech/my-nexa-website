@@ -4,9 +4,780 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Console – NexaHost</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/dashboard.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══ RESET ═══ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ═══ TOKENS ═══ */
+:root{
+  --bg:#fafaf8;
+  --bg-alt:#f4f3f0;
+  --surface:#ffffff;
+  --border:rgba(0,0,0,0.08);
+  --border-strong:rgba(0,0,0,0.14);
+  --text-primary:#111110;
+  --text-secondary:#6b6b6b;
+  --text-tertiary:#9b9b9b;
+  --accent:#5b5bd6;
+  --accent-light:#ededfc;
+  --accent-hover:#4747c2;
+  --warm:#c8a97e;
+  --red:#e5484d;
+  --green:#30a46c;
+  --gold:#e5a000;
+  --radius:12px;
+  --radius-lg:16px;
+  --shadow:0 1px 3px rgba(0,0,0,0.04);
+  --transition:0.18s ease;
+}
+
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--text-primary);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ═══ DASHBOARD LAYOUT ═══ */
+.dash-layout{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  min-height:100vh;
+}
+
+/* ═══ SIDEBAR ═══ */
+.sidebar{
+  background:var(--surface);
+  border-right:1px solid var(--border);
+  position:sticky;
+  top:0;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  overflow-y:auto;
+}
+.sidebar-header{
+  padding:28px 24px 20px;
+}
+.sidebar-logo{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:800;
+  font-size:20px;
+  color:var(--text-primary);
+}
+.sidebar-logo::after{
+  content:'';
+  display:inline-block;
+  width:6px;
+  height:6px;
+  background:var(--accent);
+  border-radius:50%;
+  margin-left:2px;
+  vertical-align:super;
+}
+.sidebar-role{
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color:var(--accent);
+  margin-top:4px;
+}
+.sidebar-nav{
+  flex:1;
+  padding:0 12px;
+  overflow-y:auto;
+}
+.sidebar-section{
+  font-size:10px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  color:var(--text-tertiary);
+  padding:20px 14px 8px;
+}
+.sidebar-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  font-weight:500;
+  color:var(--text-secondary);
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:background var(--transition),color var(--transition);
+  text-decoration:none;
+}
+.sidebar-item:hover{
+  background:var(--bg-alt);
+}
+.sidebar-item.active{
+  background:var(--accent-light);
+  color:var(--accent);
+}
+.s-icon{
+  font-size:16px;
+  width:22px;
+  text-align:center;
+  flex-shrink:0;
+}
+.sidebar-badge{
+  margin-left:auto;
+  background:var(--accent);
+  color:#fff;
+  font-size:11px;
+  font-weight:600;
+  padding:2px 8px;
+  border-radius:10px;
+  min-width:20px;
+  text-align:center;
+}
+.sidebar-footer{
+  border-top:1px solid var(--border);
+  padding:16px 20px;
+  margin-top:auto;
+}
+.sidebar-user{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.user-avatar{
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  font-size:13px;
+  color:#fff;
+  flex-shrink:0;
+}
+.avatar-admin{
+  background:linear-gradient(135deg,#e5a000,#e5484d);
+}
+.avatar-purple{
+  background:linear-gradient(135deg,var(--accent),#8b5cf6);
+}
+.user-name{
+  font-weight:600;
+  font-size:13px;
+  color:var(--text-primary);
+}
+.user-email{
+  font-size:12px;
+  color:var(--text-tertiary);
+}
+
+/* ═══ MAIN AREA ═══ */
+.dash-main{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+.dash-header{
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  padding:20px 36px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:90;
+  gap:16px;
+}
+.dash-header-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-shrink:0;
+}
+.dash-title{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:700;
+  font-size:20px;
+  color:var(--text-primary);
+}
+.dash-subtitle{
+  font-family:'Inter',sans-serif;
+  font-size:13px;
+  color:var(--text-tertiary);
+  margin-top:2px;
+}
+.dash-content{
+  padding:36px;
+  flex:1;
+}
+
+/* ═══ BUTTONS ═══ */
+.btn{
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:14px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 22px;
+  border-radius:var(--radius);
+  cursor:pointer;
+  transition:all var(--transition);
+  border:none;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
+}
+.btn-primary:hover{
+  background:var(--accent-hover);
+  transform:translateY(-1px);
+}
+.btn-ghost{
+  background:transparent;
+  border:1px solid var(--border-strong);
+  color:var(--text-secondary);
+}
+.btn-ghost:hover{
+  background:var(--bg-alt);
+}
+.btn-teal{
+  background:#30a46c;
+  color:#fff;
+}
+.btn-teal:hover{
+  background:#2b9a63;
+  transform:translateY(-1px);
+}
+.btn-danger{
+  background:rgba(229,72,77,0.08);
+  border:1px solid rgba(229,72,77,0.2);
+  color:#e5484d;
+}
+.btn-danger:hover{
+  background:rgba(229,72,77,0.14);
+}
+.btn-success{
+  background:rgba(48,164,108,0.1);
+  border:1px solid rgba(48,164,108,0.2);
+  color:#30a46c;
+}
+.btn-success:hover{
+  background:rgba(48,164,108,0.16);
+}
+.btn-lg{
+  padding:14px 32px;
+  font-size:15px;
+  border-radius:var(--radius-lg);
+}
+.btn-sm{
+  padding:6px 14px;
+  font-size:12px;
+}
+.btn-full{
+  width:100%;
+  justify-content:center;
+}
+
+/* ═══ FORMS ═══ */
+.form-group{
+  margin-bottom:20px;
+}
+.form-label{
+  display:block;
+  font-size:13px;
+  font-weight:600;
+  color:var(--text-secondary);
+  margin-bottom:8px;
+}
+.form-input{
+  width:100%;
+  background:#fff;
+  border:1px solid var(--border-strong);
+  border-radius:10px;
+  padding:12px 16px;
+  font-family:'Inter',sans-serif;
+  font-size:15px;
+  color:var(--text-primary);
+  transition:border var(--transition),box-shadow var(--transition);
+  outline:none;
+}
+.form-input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(91,91,214,0.12);
+}
+.form-input::placeholder{
+  color:var(--text-tertiary);
+}
+
+/* ═══ CARDS ═══ */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+}
+.card-header{
+  padding:24px 28px 20px;
+  border-bottom:1px solid var(--border);
+}
+.card-title{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:700;
+  font-size:16px;
+  color:var(--text-primary);
+}
+.card-subtitle{
+  font-size:13px;
+  color:var(--text-tertiary);
+  margin-top:4px;
+}
+
+/* ═══ TABLES ═══ */
+.dash-table{
+  width:100%;
+  border-collapse:collapse;
+}
+.dash-table th{
+  text-align:left;
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  color:var(--text-tertiary);
+  padding:14px 20px;
+  border-bottom:1px solid var(--border);
+  background:var(--bg-alt);
+}
+.dash-table td{
+  padding:16px 20px;
+  font-size:14px;
+  color:var(--text-primary);
+  border-bottom:1px solid var(--border);
+}
+.dash-table tr:last-child td{
+  border-bottom:none;
+}
+.dash-table tr:hover td{
+  background:var(--bg-alt);
+}
+
+/* ═══ METRIC CARDS ═══ */
+.metric-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:28px;
+}
+.metric-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:22px 24px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.metric-icon{
+  font-size:20px;
+  margin-bottom:4px;
+}
+.metric-label{
+  font-size:12px;
+  font-weight:500;
+  color:var(--text-tertiary);
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+}
+.metric-value{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:700;
+  font-size:28px;
+  color:var(--text-primary);
+  line-height:1.1;
+}
+.metric-change{
+  font-size:12px;
+  font-weight:600;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+}
+.change-up{
+  color:var(--green);
+}
+.change-down{
+  color:var(--red);
+}
+
+/* ═══ STATUS PILLS ═══ */
+.status-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:12px;
+  font-weight:600;
+  padding:4px 12px;
+  border-radius:20px;
+}
+.status-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+}
+.status-active{
+  background:rgba(48,164,108,0.1);
+  color:#30a46c;
+}
+.status-active .status-dot{
+  background:#30a46c;
+}
+.status-suspended{
+  background:rgba(229,72,77,0.08);
+  color:#e5484d;
+}
+.status-suspended .status-dot{
+  background:#e5484d;
+}
+.status-pending{
+  background:rgba(229,160,0,0.1);
+  color:#e5a000;
+}
+.status-pending .status-dot{
+  background:#e5a000;
+}
+.status-trial{
+  background:var(--accent-light);
+  color:var(--accent);
+}
+.status-trial .status-dot{
+  background:var(--accent);
+}
+
+/* ═══ PROGRESS BARS ═══ */
+.progress-bar{
+  width:100%;
+  height:6px;
+  background:var(--bg-alt);
+  border-radius:3px;
+  overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  border-radius:3px;
+  background:var(--accent);
+  transition:width 0.4s ease;
+}
+
+/* ═══ ACTION BUTTONS ═══ */
+.action-btn{
+  width:32px;
+  height:32px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:var(--surface);
+  cursor:pointer;
+  font-size:14px;
+  transition:all var(--transition);
+}
+.action-btn:hover{
+  background:var(--bg-alt);
+  border-color:var(--border-strong);
+}
+
+/* ═══ USAGE ROWS ═══ */
+.usage-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 0;
+  border-bottom:1px solid var(--border);
+}
+.usage-row:last-child{
+  border-bottom:none;
+}
+.usage-label{
+  font-size:14px;
+  font-weight:500;
+  color:var(--text-primary);
+}
+.usage-value{
+  font-size:13px;
+  color:var(--text-secondary);
+}
+.usage-bar{
+  flex:1;
+  margin:0 20px;
+  max-width:200px;
+}
+
+/* ═══ PLAN CARDS ═══ */
+.plan-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:28px;
+  text-align:center;
+  transition:all var(--transition);
+}
+.plan-card:hover{
+  border-color:var(--border-strong);
+  box-shadow:var(--shadow);
+}
+.plan-card.recommended{
+  border-color:var(--accent);
+  box-shadow:0 0 0 1px var(--accent);
+}
+.plan-name{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:700;
+  font-size:18px;
+  color:var(--text-primary);
+}
+.plan-price{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:800;
+  font-size:36px;
+  color:var(--text-primary);
+  margin:12px 0;
+}
+.plan-price span{
+  font-size:14px;
+  font-weight:500;
+  color:var(--text-tertiary);
+}
+.plan-features{
+  list-style:none;
+  padding:0;
+  margin:20px 0;
+  text-align:left;
+}
+.plan-features li{
+  font-size:14px;
+  color:var(--text-secondary);
+  padding:8px 0;
+  border-bottom:1px solid var(--border);
+}
+.plan-features li:last-child{
+  border-bottom:none;
+}
+
+/* ═══ TICKET ITEMS ═══ */
+.ticket-item{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding:20px 24px;
+  border-bottom:1px solid var(--border);
+  transition:background var(--transition);
+  cursor:pointer;
+}
+.ticket-item:hover{
+  background:var(--bg-alt);
+}
+.ticket-item:last-child{
+  border-bottom:none;
+}
+.ticket-id{
+  font-size:12px;
+  font-weight:600;
+  color:var(--text-tertiary);
+}
+.ticket-subject{
+  font-size:14px;
+  font-weight:600;
+  color:var(--text-primary);
+  margin-top:2px;
+}
+.ticket-meta{
+  font-size:12px;
+  color:var(--text-tertiary);
+  margin-top:4px;
+}
+
+/* ═══ TOAST ═══ */
+.toast{
+  position:fixed;
+  bottom:24px;
+  right:24px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:16px 24px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.08);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:14px;
+  font-weight:500;
+  color:var(--text-primary);
+  z-index:9999;
+  transform:translateY(120%);
+  opacity:0;
+  transition:all 0.3s ease;
+}
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+.toast-success{
+  border-left:3px solid var(--green);
+}
+.toast-error{
+  border-left:3px solid var(--red);
+}
+.toast-info{
+  border-left:3px solid var(--accent);
+}
+
+/* ═══ GRID HELPERS ═══ */
+.grid-2{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+}
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.grid-4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+
+/* ═══ BAR CHART ═══ */
+.bar-chart{
+  display:flex;
+  align-items:flex-end;
+  gap:8px;
+  height:180px;
+  padding:20px 0;
+}
+.bar-col{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  height:100%;
+  justify-content:flex-end;
+  gap:8px;
+}
+.bar{
+  width:100%;
+  max-width:40px;
+  background:var(--accent);
+  border-radius:6px 6px 0 0;
+  transition:height 0.4s ease;
+  min-height:4px;
+}
+.bar-label{
+  font-size:11px;
+  color:var(--text-tertiary);
+  font-weight:500;
+}
+
+/* ═══ REVENUE NUM ═══ */
+.revenue-num{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:800;
+  font-size:40px;
+  background:linear-gradient(135deg,var(--accent),var(--warm));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  line-height:1.2;
+}
+
+/* ═══ MOBILE TOGGLE ═══ */
+.mobile-toggle{
+  display:none;
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  z-index:999;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  font-size:20px;
+  cursor:pointer;
+  box-shadow:0 4px 14px rgba(91,91,214,0.3);
+  align-items:center;
+  justify-content:center;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .dash-layout{
+    grid-template-columns:220px 1fr;
+  }
+  .dash-header{
+    padding:18px 24px;
+  }
+  .dash-content{
+    padding:24px;
+  }
+  .metric-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+@media(max-width:768px){
+  .dash-layout{
+    grid-template-columns:1fr;
+  }
+  .sidebar{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:280px;
+    z-index:1000;
+    box-shadow:8px 0 30px rgba(0,0,0,0.1);
+  }
+  .sidebar.open{
+    display:flex;
+  }
+  .mobile-toggle{
+    display:flex;
+  }
+  .dash-header{
+    padding:16px 20px;
+  }
+  .dash-content{
+    padding:20px;
+  }
+  .dash-header-right{
+    flex-wrap:wrap;
+  }
+  .grid-2,.grid-3,.grid-4{
+    grid-template-columns:1fr;
+  }
+}
+@media(max-width:480px){
+  .metric-grid{
+    grid-template-columns:1fr;
+  }
+  .dash-content{
+    padding:16px;
+  }
+  .metric-value{
+    font-size:24px;
+  }
+}
+</style>
 </head>
 <body>
 <div class="dash-layout">
@@ -15,7 +786,7 @@
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <div class="sidebar-logo">NexaHost</div>
-      <div class="sidebar-role" style="color:var(--accent2)">Admin Console</div>
+      <div class="sidebar-role">Admin Console</div>
     </div>
     <nav class="sidebar-nav">
       <div class="sidebar-section">Analytics</div>
@@ -24,7 +795,7 @@
       <a class="sidebar-item" onclick="loadTab('analytics')">        <span class="s-icon">📈</span> Analytics</a>
       <div class="sidebar-section">Management</div>
       <a class="sidebar-item" onclick="loadTab('customers')">        <span class="s-icon">👥</span> Customers <span class="sidebar-badge" id="trialBadge" style="display:none"></span></a>
-      <a class="sidebar-item" onclick="loadTab('plans')">            <span class="s-icon">📦</span> Plans & Pricing</a>
+      <a class="sidebar-item" onclick="loadTab('plans')">            <span class="s-icon">📦</span> Plans &amp; Pricing</a>
       <a class="sidebar-item" onclick="loadTab('tickets')">          <span class="s-icon">🎫</span> Support Queue <span class="sidebar-badge" id="ticketBadge" style="background:var(--red);display:none"></span></a>
       <div class="sidebar-section">Infrastructure</div>
       <a class="sidebar-item" onclick="loadTab('servers')">          <span class="s-icon">🖥️</span> Server Health</a>
@@ -56,15 +827,17 @@
         <div class="dash-subtitle" id="pageSubtitle">Real-time business metrics and platform health</div>
       </div>
       <div class="dash-header-right">
-        <div style="font-size:12px;color:var(--green);background:rgba(0,224,122,.12);border:1px solid rgba(0,224,122,.25);padding:6px 14px;border-radius:8px;">● All Systems Operational</div>
+        <div style="font-size:12px;font-weight:600;color:var(--green);background:rgba(48,164,108,0.1);border:1px solid rgba(48,164,108,0.2);padding:6px 14px;border-radius:8px;">● All Systems Operational</div>
         <button class="btn btn-teal btn-sm" onclick="exportReport()">↓ Export Report</button>
       </div>
     </header>
     <div class="dash-content" id="tabContent">
-      <div style="text-align:center;padding:80px;color:var(--text3)">Loading…</div>
+      <div style="text-align:center;padding:80px;color:var(--text-tertiary)">Loading…</div>
     </div>
   </div>
 </div>
+
+<button class="mobile-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
 
 <script src="/js/main.js"></script>
 <script src="/js/admin-dashboard.js"></script>

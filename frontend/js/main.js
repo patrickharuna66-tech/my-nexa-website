@@ -1,5 +1,6 @@
 /* ═══════════════════════════════════════
    NEXAHOST — MAIN JS
+   Clean Velocity Design System
    ═══════════════════════════════════════ */
 
 // ── TOAST NOTIFICATIONS ──
@@ -32,8 +33,8 @@ const navbar = document.getElementById('navbar');
 if (navbar) {
   window.addEventListener('scroll', () => {
     navbar.style.background = window.scrollY > 20
-      ? 'rgba(5,5,10,.95)'
-      : 'rgba(5,5,10,.85)';
+      ? 'rgba(250,250,248,0.95)'
+      : 'rgba(250,250,248,0.85)';
   });
 }
 

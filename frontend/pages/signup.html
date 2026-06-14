@@ -4,43 +4,300 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Create Account – NexaHost</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-body { display:flex; min-height:100vh; align-items:center; justify-content:center; padding:60px 20px; }
-.signup-wrap { max-width: 560px; width: 100%; }
-.signup-logo { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; background:linear-gradient(135deg,var(--accent2),var(--teal)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:32px; text-align:center; display:block; }
-.signup-card { background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius-xl); padding:48px; box-shadow:var(--shadow); }
-.plan-options { display:flex; flex-direction:column; gap:10px; margin-bottom:24px; }
-.plan-option {
-  display:flex; align-items:center; gap:14px;
-  padding:14px 16px;
-  border:1px solid var(--border2);
-  border-radius:var(--radius);
-  cursor:pointer;
-  transition:.2s;
-}
-.plan-option:hover { border-color:var(--border3); background:var(--surface2); }
-.plan-option.selected { border-color:var(--accent); background:rgba(124,92,252,.1); }
-.plan-option input { accent-color:var(--accent); width:16px; height:16px; cursor:pointer; }
-.plan-option-info { flex:1; }
-.plan-option-name  { font-weight:600; font-size:15px; }
-.plan-option-desc  { font-size:12px; color:var(--text3); margin-top:2px; }
-.plan-option-price { font-family:'Syne',sans-serif; font-weight:800; color:var(--accent2); font-size:16px; }
-.plan-popular { font-size:10px; background:var(--accent); color:#fff; padding:2px 8px; border-radius:4px; font-weight:700; margin-left:8px; font-family:'Syne',sans-serif; }
-.terms-note { font-size:12px; color:var(--text3); text-align:center; margin-top:16px; line-height:1.6; }
-.terms-note a { color:var(--accent2); }
+  :root {
+    --bg: #fafaf8;
+    --bg-alt: #f4f3f0;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.08);
+    --border-strong: rgba(0,0,0,0.14);
+    --text-primary: #111110;
+    --text-secondary: #6b6b6b;
+    --text-tertiary: #9b9b9b;
+    --accent: #5b5bd6;
+    --accent-light: #ededfc;
+    --accent-hover: #4747c2;
+    --warm: #c8a97e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    padding: 60px 20px;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .signup-wrap {
+    max-width: 560px;
+    width: 100%;
+  }
+
+  .signup-logo {
+    display: block;
+    text-align: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-primary);
+    text-decoration: none;
+    margin-bottom: 32px;
+  }
+
+  .signup-logo .dot {
+    color: var(--accent);
+  }
+
+  .signup-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .signup-card h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+  }
+
+  .signup-card .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  #errorMsg {
+    display: none;
+    background: rgba(255,79,79,0.1);
+    border: 1px solid rgba(255,79,79,0.35);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #d93025;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+  }
+
+  .form-input {
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .form-input::placeholder {
+    color: var(--text-tertiary);
+  }
+
+  .form-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(91,91,214,0.12);
+  }
+
+  .name-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .plan-section {
+    margin-bottom: 24px;
+  }
+
+  .plan-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .plan-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .plan-option:hover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+
+  .plan-option.selected {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+
+  .plan-option input[type="radio"] {
+    accent-color: var(--accent);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .plan-option-info {
+    flex: 1;
+  }
+
+  .plan-option-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-primary);
+  }
+
+  .plan-option-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+  }
+
+  .plan-option-price {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    color: var(--accent);
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .plan-option-price span {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+  }
+
+  .plan-popular {
+    display: inline-block;
+    font-size: 10px;
+    background: var(--accent);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    margin-left: 8px;
+    font-family: 'Inter', sans-serif;
+    vertical-align: middle;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 48px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 9999px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-submit:hover {
+    background: var(--accent-hover);
+  }
+
+  .btn-submit:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  .terms-note {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--text-tertiary);
+    text-align: center;
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+
+  .terms-note a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .terms-note a:hover {
+    text-decoration: underline;
+  }
+
+  .signin-link {
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .signin-link a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .signin-link a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 480px) {
+    .signup-card { padding: 32px 24px; }
+    .name-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
 <div class="signup-wrap">
-  <a href="/" class="signup-logo">NexaHost</a>
+  <a href="/" class="signup-logo">NexaHost<span class="dot">.</span></a>
   <div class="signup-card">
-    <h2 style="font-size:26px;font-weight:800;margin-bottom:6px;text-align:center">Start your free trial</h2>
-    <p style="font-size:14px;color:var(--text2);text-align:center;margin-bottom:32px">30 days free. No credit card required. Cancel anytime.</p>
-    <div id="errorMsg" style="display:none;background:rgba(255,79,79,.15);border:1px solid rgba(255,79,79,.4);border-radius:var(--radius);padding:12px 16px;font-size:14px;color:var(--red);margin-bottom:20px"></div>
+    <h2>Start your free trial</h2>
+    <p class="subtitle">30 days free. No credit card required. Cancel anytime.</p>
+    <div id="errorMsg"></div>
     <form id="signupForm" onsubmit="handleSignup(event)">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="name-grid">
         <div class="form-group">
           <label class="form-label">First Name</label>
           <input type="text" id="firstName" class="form-input" placeholder="Jane" required>
@@ -58,7 +315,7 @@ body { display:flex; min-height:100vh; align-items:center; justify-content:cente
         <label class="form-label">Password</label>
         <input type="password" id="password" class="form-input" placeholder="Min. 8 characters" required autocomplete="new-password" minlength="8">
       </div>
-      <div style="margin-bottom:24px">
+      <div class="plan-section">
         <label class="form-label">Choose Your Plan</label>
         <div class="plan-options" id="planOptions">
           <label class="plan-option" id="opt-starter">
@@ -67,7 +324,7 @@ body { display:flex; min-height:100vh; align-items:center; justify-content:cente
               <div class="plan-option-name">Starter – Essential</div>
               <div class="plan-option-desc">1 website · 10 GB · 5 emails · SSL</div>
             </div>
-            <div class="plan-option-price">$5.99<span style="font-size:11px;color:var(--text3)">/mo</span></div>
+            <div class="plan-option-price">$5.99<span>/mo</span></div>
           </label>
           <label class="plan-option selected" id="opt-business">
             <input type="radio" name="plan" value="business" checked onchange="selectPlan('business')">
@@ -75,7 +332,7 @@ body { display:flex; min-height:100vh; align-items:center; justify-content:cente
               <div class="plan-option-name">Business – Growth <span class="plan-popular">POPULAR</span></div>
               <div class="plan-option-desc">Unlimited sites · 50 GB · unlimited emails · domain</div>
             </div>
-            <div class="plan-option-price">$12.99<span style="font-size:11px;color:var(--text3)">/mo</span></div>
+            <div class="plan-option-price">$12.99<span>/mo</span></div>
           </label>
           <label class="plan-option" id="opt-pro">
             <input type="radio" name="plan" value="pro" onchange="selectPlan('pro')">
@@ -83,14 +340,14 @@ body { display:flex; min-height:100vh; align-items:center; justify-content:cente
               <div class="plan-option-name">Pro – Enterprise</div>
               <div class="plan-option-desc">Unlimited · 200 GB · hourly backups · dedicated IP</div>
             </div>
-            <div class="plan-option-price">$19.99<span style="font-size:11px;color:var(--text3)">/mo</span></div>
+            <div class="plan-option-price">$19.99<span>/mo</span></div>
           </label>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary btn-full btn-lg" id="submitBtn">Create Account &amp; Start Free Trial →</button>
+      <button type="submit" class="btn-submit" id="submitBtn">Create Account &amp; Start Free Trial →</button>
     </form>
     <p class="terms-note">By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.<br>Your 30-day free trial starts immediately — no payment required.</p>
-    <div style="text-align:center;margin-top:20px;font-size:14px;color:var(--text2)">Already have an account? <a href="/pages/login.html" style="color:var(--accent2);font-weight:600">Sign in</a></div>
+    <div class="signin-link">Already have an account? <a href="/pages/login.html">Sign in</a></div>
   </div>
 </div>
 <script src="/js/main.js"></script>

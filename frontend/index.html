@@ -3,295 +3,1303 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="NexaHost – Premium web hosting with blazing NVMe speed, 99.9% uptime, free SSL, and 24/7 expert support. Start free for 30 days.">
-<meta name="keywords" content="web hosting, fast hosting, cheap hosting, NVMe hosting, WordPress hosting, business hosting">
-<meta property="og:title" content="NexaHost – Blazing Fast Web Hosting">
-<meta property="og:description" content="Enterprise-grade hosting starting at $5.99/month. 99.9% uptime. Free SSL. 30-day money-back guarantee.">
+<meta name="description" content="NexaHost – Enterprise-grade hosting that's blazing fast and always on. 99.99% uptime, 2.1ms latency, launch in minutes.">
+<meta name="keywords" content="web hosting, fast hosting, enterprise hosting, NVMe hosting, WordPress hosting, cloud hosting">
+<meta property="og:title" content="NexaHost – Blazing Fast. Always On.">
+<meta property="og:description" content="Enterprise-grade hosting that scales with your ambition. 99.99% uptime. Launch in minutes.">
 <meta property="og:type" content="website">
-<title>NexaHost – Premium Web Hosting | Fast, Secure & Reliable</title>
+<title>NexaHost – Blazing Fast. Always On. | Enterprise Hosting</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/landing.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════════ */
+:root {
+  --bg: #fafaf8;
+  --bg-alt: #f4f3f0;
+  --surface: #ffffff;
+  --border: rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.14);
+  --text-primary: #111110;
+  --text-secondary: #6b6b6b;
+  --text-tertiary: #9b9b9b;
+  --accent: #5b5bd6;
+  --accent-light: #ededfc;
+  --accent-hover: #4747c2;
+  --warm: #c8a97e;
+}
+
+/* ═══════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul { list-style: none; }
+
+img { max-width: 100%; display: block; }
+
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════ */
+.display-font {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.hero-headline {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(48px, 6.5vw, 88px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.section-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.section-headline {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(30px, 3.5vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+
+.body-text {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+/* ═══════════════════════════════════════════
+   NAVBAR
+   ═══════════════════════════════════════════ */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 60px;
+  background: rgba(250, 250, 248, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.nav-logo {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.nav-logo-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 1.5px;
+  margin-left: 2px;
+  margin-bottom: 2px;
+  vertical-align: baseline;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.15s ease;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-signin {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.15s ease;
+}
+
+.nav-signin:hover {
+  color: var(--text-primary);
+}
+
+.nav-cta {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 9999px;
+  padding: 0 20px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.nav-cta:hover {
+  background: var(--accent-hover);
+  transform: scale(1.02);
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile nav */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background: rgba(250, 250, 248, 0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 24px;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 999;
+}
+
+.mobile-nav.open {
+  display: flex;
+}
+
+.mobile-nav a {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.15s ease;
+}
+
+.mobile-nav a:last-child {
+  border-bottom: none;
+}
+
+.mobile-nav a:hover {
+  color: var(--text-primary);
+}
+
+.mobile-nav .mobile-cta {
+  margin-top: 8px;
+  text-align: center;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 9999px;
+  padding: 12px 0;
+  font-weight: 600;
+  border-bottom: none;
+}
+
+.mobile-nav .mobile-cta:hover {
+  color: #fff;
+  background: var(--accent-hover);
+}
+
+/* ═══════════════════════════════════════════
+   HERO SECTION
+   ═══════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+  padding: 120px 24px 80px;
+}
+
+/* Dot grid background */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  z-index: 0;
+}
+
+/* Radial vignette over dots */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 75% 65% at 50% 50%, transparent 40%, var(--bg) 100%);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  margin-bottom: 32px;
+  opacity: 0;
+}
+
+/* Gradient text for "Fast." */
+.gradient-word {
+  background: linear-gradient(90deg, #5b5bd6, #c8a97e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-headline {
+  margin-bottom: 0;
+  opacity: 0;
+}
+
+/* Divider */
+.hero-divider {
+  width: 100%;
+  max-width: 480px;
+  height: 1px;
+  background: var(--border);
+  margin: 28px auto;
+  border: none;
+  opacity: 0;
+}
+
+/* Subtext */
+.hero-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto 36px;
+  opacity: 0;
+}
+
+/* CTA row */
+.hero-cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  opacity: 0;
+  flex-wrap: wrap;
+}
+
+.btn-primary-lg {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 9999px;
+  padding: 0 28px;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.btn-primary-lg:hover {
+  background: var(--accent-hover);
+  transform: scale(1.02);
+}
+
+.btn-secondary-lg {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 9999px;
+  padding: 0 28px;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.btn-secondary-lg:hover {
+  background: var(--bg-alt);
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+/* Trust line */
+.hero-trust {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--text-tertiary);
+  text-align: center;
+  opacity: 0;
+}
+
+.hero-trust span {
+  margin: 0 4px;
+}
+
+/* ═══════════════════════════════════════════
+   STATS STRIP
+   ═══════════════════════════════════════════ */
+.stats-strip {
+  width: 100%;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-block {
+  flex: 1;
+  text-align: center;
+  padding: 32px 48px;
+}
+
+.stat-block + .stat-block {
+  border-left: 1px solid var(--border);
+}
+
+.stat-number {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════════
+   FEATURES SECTION
+   ═══════════════════════════════════════════ */
+.features-section {
+  background: var(--bg-alt);
+  padding: 100px 24px;
+}
+
+.features-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.features-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  color: var(--text-secondary);
+  max-width: 460px;
+  margin: 16px auto 0;
+  line-height: 1.65;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.feature-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-light);
+  transform: translateY(-2px);
+}
+
+.feature-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.feature-icon svg {
+  width: 20px;
+  height: 20px;
+  color: var(--accent);
+  stroke: var(--accent);
+  fill: none;
+}
+
+.feature-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.feature-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* ═══════════════════════════════════════════
+   HOW IT WORKS
+   ═══════════════════════════════════════════ */
+.how-section {
+  background: var(--bg);
+  padding: 100px 24px;
+}
+
+.how-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.steps-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Dashed connector line */
+.steps-row::before {
+  content: '';
+  position: absolute;
+  top: 42px;
+  left: calc(16.66% + 20px);
+  right: calc(16.66% + 20px);
+  height: 1.5px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--border-strong) 0,
+    var(--border-strong) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  z-index: 0;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  padding: 0 24px;
+  z-index: 1;
+}
+
+.step-number {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 64px;
+  color: var(--accent-light);
+  line-height: 1;
+  margin-bottom: 12px;
+  user-select: none;
+  transition: opacity 0.4s ease;
+}
+
+.step-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.step-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════
+   CTA BANNER
+   ═══════════════════════════════════════════ */
+.cta-banner {
+  background: var(--accent);
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.cta-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 16px;
+}
+
+.cta-headline {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(30px, 3.5vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.cta-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  color: rgba(255,255,255,0.7);
+  max-width: 460px;
+  margin: 0 auto 32px;
+  line-height: 1.65;
+}
+
+.cta-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: transparent;
+  border: 1.5px solid #fff;
+  border-radius: 9999px;
+  padding: 0 28px;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.cta-btn:hover {
+  background: #fff;
+  color: var(--accent);
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+.site-footer {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  padding: 32px 24px;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-logo {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo .nav-logo-dot {
+  width: 5px;
+  height: 5px;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-links a {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.15s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+.footer-copy {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════ */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Hero entrance animations */
+  .hero-badge {
+    animation: fadeIn 0.3s ease forwards;
+    animation-delay: 0.1s;
+  }
+
+  .hero-headline {
+    animation: fadeInUp 0.5s ease forwards;
+    animation-delay: 0.25s;
+  }
+
+  .hero-divider {
+    animation: fadeIn 0.4s ease forwards;
+    animation-delay: 0.55s;
+  }
+
+  .hero-sub {
+    animation: fadeInUp 0.5s ease forwards;
+    animation-delay: 0.65s;
+  }
+
+  .hero-cta-row {
+    animation: fadeInUp 0.5s ease forwards;
+    animation-delay: 0.8s;
+  }
+
+  .hero-trust {
+    animation: fadeIn 0.4s ease forwards;
+    animation-delay: 0.95s;
+  }
+
+  /* Feature card scroll animation */
+  .feature-card {
+    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .feature-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Static fallback for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-badge,
+  .hero-headline,
+  .hero-divider,
+  .hero-sub,
+  .hero-cta-row,
+  .hero-trust {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .feature-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .steps-row::before {
+    display: none;
+  }
+
+  .step {
+    max-width: 320px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .nav-links,
+  .nav-right {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 120px 20px 60px;
+  }
+
+  .hero-headline {
+    font-size: clamp(36px, 8vw, 56px);
+  }
+
+  .stats-inner {
+    flex-wrap: wrap;
+  }
+
+  .stat-block {
+    flex: 1 1 50%;
+    padding: 24px 20px;
+  }
+
+  /* Reset left borders, use top border for bottom row */
+  .stat-block + .stat-block {
+    border-left: none;
+  }
+
+  .stat-block:nth-child(even) {
+    border-left: 1px solid var(--border);
+  }
+
+  .stat-block:nth-child(n+3) {
+    border-top: 1px solid var(--border);
+  }
+
+  .features-section {
+    padding: 64px 20px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+  }
+
+  .how-section {
+    padding: 64px 20px;
+  }
+
+  .cta-banner {
+    padding: 56px 20px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .hero-cta-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-primary-lg,
+  .btn-secondary-lg {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+}
+</style>
 </head>
 <body>
 
-<!-- ═══ NAVIGATION ═══ -->
+<!-- ═══════════════════════════════════════════
+     NAVBAR
+     ═══════════════════════════════════════════ -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="/" class="logo">NexaHost</a>
+    <a href="/" class="nav-logo" id="nav-logo">NexaHost<span class="nav-logo-dot"></span></a>
+
     <div class="nav-links" id="navLinks">
-      <a href="#features" class="nav-link">Features</a>
-      <a href="#pricing" class="nav-link">Pricing</a>
-      <a href="#testimonials" class="nav-link">Reviews</a>
-      <a href="/pages/login.html" class="btn btn-ghost">Sign In</a>
-      <a href="/pages/signup.html" class="btn btn-primary">Get Started Free →</a>
+      <a href="#features" class="nav-link" id="nav-features">Features</a>
+      <a href="#pricing" class="nav-link" id="nav-pricing">Pricing</a>
+      <a href="#reviews" class="nav-link" id="nav-reviews">Reviews</a>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+
+    <div class="nav-right" id="navRight">
+      <a href="/pages/login.html" class="nav-signin" id="nav-signin">Sign In</a>
+      <a href="/pages/signup.html" class="nav-cta" id="nav-get-started">Get Started Free →</a>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
 </nav>
 
-<!-- ═══ HERO ═══ -->
-<section class="hero">
-  <div class="hero-bg">
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
-  </div>
-  <div class="hero-content">
-    <div class="hero-badge">
-      <span class="badge-dot"></span>
-      Powered by InMotion Hosting Infrastructure
-    </div>
-    <h1>Your Website,<br><span class="gradient-text">Blazing Fast.</span><br>Always On.</h1>
-    <p class="hero-sub">Enterprise-grade web hosting that scales with your ambition. Launch in minutes. Sleep at night knowing your site never goes down.</p>
-    <div class="hero-cta">
-      <a href="/pages/signup.html" class="btn btn-primary btn-lg">Start Free 30-Day Trial →</a>
-      <a href="#pricing" class="btn btn-ghost btn-lg">View Pricing</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat"><div class="stat-num">99.9%</div><div class="stat-label">Uptime SLA</div></div>
-      <div class="stat-divider"></div>
-      <div class="stat"><div class="stat-num">10K+</div><div class="stat-label">Sites Hosted</div></div>
-      <div class="stat-divider"></div>
-      <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Expert Support</div></div>
-      <div class="stat-divider"></div>
-      <div class="stat"><div class="stat-num">&lt;1s</div><div class="stat-label">Avg. Load Time</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ TRUST BAR ═══ -->
-<div class="trust-bar">
-  <div class="trust-inner">
-    <div class="trust-item"><span>🔒</span> SSL Secured</div>
-    <div class="trust-item"><span>☁️</span> Daily Backups</div>
-    <div class="trust-item"><span>⚡</span> NVMe SSD Storage</div>
-    <div class="trust-item"><span>🌍</span> Global CDN</div>
-    <div class="trust-item"><span>🛡️</span> DDoS Protection</div>
-    <div class="trust-item"><span>📧</span> Free Business Email</div>
-  </div>
+<!-- Mobile nav overlay -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#features" class="mobile-nav-link">Features</a>
+  <a href="#pricing" class="mobile-nav-link">Pricing</a>
+  <a href="#reviews" class="mobile-nav-link">Reviews</a>
+  <a href="/pages/login.html">Sign In</a>
+  <a href="/pages/signup.html" class="mobile-cta">Get Started Free →</a>
 </div>
 
-<!-- ═══ FEATURES ═══ -->
-<section id="features" class="section">
-  <div class="container">
-    <div class="section-tag">Why NexaHost</div>
-    <h2 class="section-title">Everything your website<br>needs to win online</h2>
-    <p class="section-sub">We handle the technical complexity so you can focus on growing your business.</p>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon icon-purple">⚡</div>
-        <h3>Blazing NVMe Speed</h3>
-        <p>NVMe SSD storage delivers up to 20× faster load times than traditional hosting. Your visitors stay, and Google ranks you higher.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon icon-teal">🛡️</div>
-        <h3>Always-On Security</h3>
-        <p>Free SSL certificates, automated malware scanning, DDoS protection, and Web Application Firewall — all included at no extra cost.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon icon-pink">🌍</div>
-        <h3>Global CDN Network</h3>
-        <p>Your content delivered from 200+ edge locations worldwide. Fast for visitors in Lagos, London, or Los Angeles.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon icon-gold">💾</div>
-        <h3>Daily Automated Backups</h3>
-        <p>Sleep soundly knowing your site is backed up every 24 hours. One-click restoration if anything ever goes wrong.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon icon-purple">📧</div>
-        <h3>Professional Email</h3>
-        <p>Create unlimited you@yourbusiness.com addresses. Look professional from day one and build trust with every email you send.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon icon-teal">🎛️</div>
-        <h3>cPanel Control Panel</h3>
-        <p>The world's most popular hosting control panel. Install WordPress in 1 click, manage files, databases, and email with ease.</p>
-      </div>
+<!-- ═══════════════════════════════════════════
+     HERO SECTION
+     ═══════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-badge" id="hero-badge">⚡ Powered by InMotion Hosting Infrastructure</div>
+
+    <h1 class="hero-headline" id="hero-headline">
+      Your Website,<br>
+      Blazing <span class="gradient-word">Fast.</span><br>
+      Always On.
+    </h1>
+
+    <hr class="hero-divider">
+
+    <p class="hero-sub" id="hero-sub">
+      Enterprise-grade hosting that scales with your ambition. Launch in minutes. Sleep at night knowing your site never goes down.
+    </p>
+
+    <div class="hero-cta-row" id="hero-cta">
+      <a href="/pages/signup.html" class="btn-primary-lg" id="hero-cta-primary">Get Started Free →</a>
+      <a href="#how-it-works" class="btn-secondary-lg" id="hero-cta-secondary">See how it works</a>
+    </div>
+
+    <p class="hero-trust" id="hero-trust">
+      No credit card required <span>·</span> Setup in under 5 minutes <span>·</span> Cancel anytime
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     STATS STRIP
+     ═══════════════════════════════════════════ -->
+<section class="stats-strip" id="stats">
+  <div class="stats-inner">
+    <div class="stat-block">
+      <div class="stat-number">99.99%</div>
+      <div class="stat-label">Uptime</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number">2.1ms</div>
+      <div class="stat-label">Avg Latency</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number">50,000+</div>
+      <div class="stat-label">Sites</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">Support</div>
     </div>
   </div>
 </section>
 
-<!-- ═══ PRICING ═══ -->
-<section id="pricing" class="section section-dark">
-  <div class="container text-center">
-    <div class="section-tag">Transparent Pricing</div>
-    <h2 class="section-title">Simple plans.<br>No surprises.</h2>
-    <p class="section-sub mx-auto">All plans include free domain for 1 year, SSL, and 24/7 support.<br>Try free for 30 days — no credit card required.</p>
-    <div class="pricing-grid">
-      <!-- STARTER -->
-      <div class="pricing-card">
-        <div class="pricing-tier">Starter</div>
-        <div class="pricing-name">Essential</div>
-        <div class="pricing-price"><span class="price-dollar">$</span><span class="price-num">5.99</span><span class="price-mo">/mo</span></div>
-        <p class="pricing-desc">Perfect for personal sites, portfolios, and small businesses just getting started online.</p>
-        <ul class="pricing-features">
-          <li><span class="check">✓</span> 1 Website</li>
-          <li><span class="check">✓</span> 10 GB NVMe SSD Storage</li>
-          <li><span class="check">✓</span> Unmetered Bandwidth</li>
-          <li><span class="check">✓</span> Free SSL Certificate</li>
-          <li><span class="check">✓</span> 5 Email Accounts</li>
-          <li><span class="check">✓</span> cPanel Access</li>
-          <li><span class="check">✓</span> 1-Click WordPress</li>
-          <li><span class="check">✓</span> 99.9% Uptime Guarantee</li>
-        </ul>
-        <a href="/pages/signup.html?plan=starter" class="btn btn-ghost btn-full">Start Free Trial</a>
+<!-- ═══════════════════════════════════════════
+     FEATURES SECTION
+     ═══════════════════════════════════════════ -->
+<section class="features-section" id="features">
+  <div class="features-header">
+    <div class="section-eyebrow">WHAT YOU GET</div>
+    <h2 class="section-headline">Everything fast hosting should be.</h2>
+    <p class="features-sub">Reliable infrastructure, zero compromises. We handle complexity so you focus on growth.</p>
+  </div>
+
+  <div class="features-grid" id="features-grid">
+    <!-- Card 1: Global CDN -->
+    <div class="feature-card" id="feature-cdn">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
       </div>
-      <!-- BUSINESS (FEATURED) -->
-      <div class="pricing-card featured">
-        <div class="popular-badge">✦ MOST POPULAR</div>
-        <div class="pricing-tier">Business</div>
-        <div class="pricing-name gradient-text">Growth</div>
-        <div class="pricing-price"><span class="price-dollar accent">$</span><span class="price-num gradient-text">12.99</span><span class="price-mo">/mo</span></div>
-        <p class="pricing-desc">For growing businesses and professionals who need more power, email, and resources.</p>
-        <ul class="pricing-features">
-          <li><span class="check">✓</span> Unlimited Websites</li>
-          <li><span class="check">✓</span> 50 GB NVMe SSD Storage</li>
-          <li><span class="check">✓</span> Unmetered Bandwidth</li>
-          <li><span class="check">✓</span> Free SSL + Wildcard SSL</li>
-          <li><span class="check">✓</span> Unlimited Email Accounts</li>
-          <li><span class="check">✓</span> Free Domain for 1 Year</li>
-          <li><span class="check">✓</span> Daily Backups</li>
-          <li><span class="check">✓</span> Priority 24/7 Support</li>
-          <li><span class="check">✓</span> Staging Environment</li>
-        </ul>
-        <a href="/pages/signup.html?plan=business" class="btn btn-primary btn-full">Start Free Trial →</a>
-      </div>
-      <!-- PRO -->
-      <div class="pricing-card">
-        <div class="pricing-tier">Pro</div>
-        <div class="pricing-name">Enterprise</div>
-        <div class="pricing-price"><span class="price-dollar">$</span><span class="price-num">19.99</span><span class="price-mo">/mo</span></div>
-        <p class="pricing-desc">Maximum power for agencies, eCommerce, and high-traffic websites that demand the best.</p>
-        <ul class="pricing-features">
-          <li><span class="check">✓</span> Unlimited Websites</li>
-          <li><span class="check">✓</span> 200 GB NVMe SSD Storage</li>
-          <li><span class="check">✓</span> Unmetered Bandwidth</li>
-          <li><span class="check">✓</span> Free SSL + Auto-Renew</li>
-          <li><span class="check">✓</span> Unlimited Email Accounts</li>
-          <li><span class="check">✓</span> Free Domain for 1 Year</li>
-          <li><span class="check">✓</span> Hourly Backups</li>
-          <li><span class="check">✓</span> Dedicated IP Address</li>
-          <li><span class="check">✓</span> Advanced DDoS Protection</li>
-          <li><span class="check">✓</span> White-Glove Onboarding</li>
-        </ul>
-        <a href="/pages/signup.html?plan=pro" class="btn btn-ghost btn-full">Start Free Trial</a>
-      </div>
+      <div class="feature-title">Global CDN</div>
+      <p class="feature-desc">Content delivered from 200+ edge locations worldwide. Fast for visitors in Lagos, London, or Los Angeles.</p>
     </div>
-    <!-- GUARANTEE -->
-    <div class="guarantee-box">
-      <div class="guarantee-icon">🔒</div>
-      <h3>30-Day Money-Back Guarantee</h3>
-      <p>Not happy? We'll refund you — no questions asked — within 30 days. That's our promise to you.</p>
+
+    <!-- Card 2: Auto-Scaling -->
+    <div class="feature-card" id="feature-scaling">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      </div>
+      <div class="feature-title">Auto-Scaling</div>
+      <p class="feature-desc">Traffic spike? Your site scales seamlessly. Resources adjust in real-time so your visitors never feel the load.</p>
+    </div>
+
+    <!-- Card 3: One-Click SSL -->
+    <div class="feature-card" id="feature-ssl">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div class="feature-title">One-Click SSL</div>
+      <p class="feature-desc">Free SSL certificates installed in one click. Auto-renewed, always active. Your visitors see the green padlock from day one.</p>
+    </div>
+
+    <!-- Card 4: DDoS Protection -->
+    <div class="feature-card" id="feature-ddos">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="feature-title">DDoS Protection</div>
+      <p class="feature-desc">Enterprise-grade threat mitigation absorbs attacks automatically. Your site stays online while we handle the rest.</p>
+    </div>
+
+    <!-- Card 5: Daily Backups -->
+    <div class="feature-card" id="feature-backups">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+      </div>
+      <div class="feature-title">Daily Backups</div>
+      <p class="feature-desc">Automatic daily backups with one-click restore. Sleep soundly knowing your data is always safe and recoverable.</p>
+    </div>
+
+    <!-- Card 6: 99.99% SLA -->
+    <div class="feature-card" id="feature-sla">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div class="feature-title">99.99% SLA</div>
+      <p class="feature-desc">We guarantee near-perfect uptime backed by a service level agreement. If we miss it, you get credited. Period.</p>
     </div>
   </div>
 </section>
 
-<!-- ═══ TESTIMONIALS ═══ -->
-<section id="testimonials" class="section">
-  <div class="container">
-    <div class="section-tag">Customer Stories</div>
-    <h2 class="section-title">Thousands of businesses<br>trust NexaHost</h2>
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Switched from our old host after years of downtime nightmares. NexaHost has been 100% uptime for 8 months. My e-commerce store hasn't lost a single sale."</p>
-        <div class="testimonial-author">
-          <div class="avatar avatar-purple">AO</div>
-          <div><div class="author-name">Adaeze Okafor</div><div class="author-title">eCommerce Owner, Lagos</div></div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"The speed difference is night and day. Google showed a 40% improvement in Core Web Vitals after migrating. Organic traffic is up 23% in 60 days."</p>
-        <div class="testimonial-author">
-          <div class="avatar avatar-teal">MW</div>
-          <div><div class="author-name">Marcus Webb</div><div class="author-title">Digital Agency Owner, UK</div></div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Support replied in 4 minutes at 2am when my site was down before a product launch. Problem solved in 12 minutes. These people genuinely care."</p>
-        <div class="testimonial-author">
-          <div class="avatar avatar-pink">SK</div>
-          <div><div class="author-name">Sarah Kim</div><div class="author-title">SaaS Founder, Toronto</div></div>
-        </div>
-      </div>
+<!-- ═══════════════════════════════════════════
+     HOW IT WORKS
+     ═══════════════════════════════════════════ -->
+<section class="how-section" id="how-it-works">
+  <div class="how-header">
+    <div class="section-eyebrow">THE PROCESS</div>
+    <h2 class="section-headline">Live in three steps.</h2>
+  </div>
+
+  <div class="steps-row">
+    <div class="step">
+      <div class="step-number" data-step="01">01</div>
+      <div class="step-title">Pick your plan</div>
+      <p class="step-desc">Choose the hosting tier that fits your needs. No hidden fees, no lock-in contracts.</p>
+    </div>
+    <div class="step">
+      <div class="step-number" data-step="02">02</div>
+      <div class="step-title">Connect your domain</div>
+      <p class="step-desc">Point your existing domain or register a new one. We handle DNS configuration for you.</p>
+    </div>
+    <div class="step">
+      <div class="step-number" data-step="03">03</div>
+      <div class="step-title">Go live instantly</div>
+      <p class="step-desc">Your site is deployed on our global infrastructure. Fast, secure, and monitored 24/7.</p>
     </div>
   </div>
 </section>
 
-<!-- ═══ DOMAIN SEARCH ═══ -->
-<section class="section section-dark">
-  <div class="container">
-    <div class="domain-search-section">
-      <div class="section-tag">Domain Search</div>
-      <h2 style="font-size:38px;font-weight:800;letter-spacing:-1px;margin:12px 0 24px">Find your perfect domain</h2>
-      <div class="domain-search-wrap">
-        <input type="text" id="domainInput" class="domain-input" placeholder="yourbusiness.com">
-        <button class="domain-btn" onclick="searchDomain()">Search →</button>
-      </div>
-      <div id="domainResult" class="domain-result"></div>
-    </div>
-  </div>
+<!-- ═══════════════════════════════════════════
+     CTA BANNER
+     ═══════════════════════════════════════════ -->
+<section class="cta-banner" id="cta-banner">
+  <div class="cta-eyebrow">READY?</div>
+  <h2 class="cta-headline">Launch your site today.</h2>
+  <p class="cta-sub">Join 50,000+ websites powered by NexaHost. Setup takes less than five minutes.</p>
+  <a href="/pages/signup.html" class="cta-btn" id="cta-get-started">Get Started Free →</a>
 </section>
 
-<!-- ═══ FINAL CTA ═══ -->
-<section class="cta-section">
-  <div class="container text-center">
-    <div class="hero-badge" style="display:inline-flex;margin:0 auto 24px">
-      <span class="badge-dot"></span> Limited Time: First month free
-    </div>
-    <h2 class="section-title">Ready to launch your <span class="gradient-text">dream website?</span></h2>
-    <p class="section-sub mx-auto">Join thousands of businesses powered by NexaHost. No credit card required for your free trial.</p>
-    <div class="hero-cta" style="margin-top:36px">
-      <a href="/pages/signup.html" class="btn btn-primary btn-lg">Get Started Free — No Card Needed →</a>
-      <a href="#features" class="btn btn-ghost btn-lg">Learn More</a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ FOOTER ═══ -->
-<footer>
+<!-- ═══════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════ -->
+<footer class="site-footer" id="site-footer">
   <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand-col">
-        <div class="footer-logo">NexaHost</div>
-        <p class="footer-desc">Premium web hosting built on enterprise infrastructure. Fast, secure, and always online — so you can focus on what matters: your business.</p>
-        <div class="footer-badge">Powered by InMotion Hosting</div>
-      </div>
-      <div class="footer-col">
-        <h4>Hosting</h4>
-        <a href="#">Shared Hosting</a>
-        <a href="#">WordPress Hosting</a>
-        <a href="#">Business Hosting</a>
-        <a href="#">VPS Hosting</a>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="#">About Us</a>
-        <a href="#">Blog</a>
-        <a href="#">Affiliate Program</a>
-        <a href="/pages/login.html">Partner Portal</a>
-      </div>
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="#">Knowledge Base</a>
-        <a href="#">Open a Ticket</a>
-        <a href="#">System Status</a>
-        <a href="#">Contact Us</a>
-      </div>
+    <div class="footer-logo">NexaHost<span class="nav-logo-dot"></span></div>
+    <div class="footer-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#reviews">Reviews</a>
+      <a href="/pages/login.html">Sign In</a>
     </div>
-    <div class="footer-bottom">
-      <span>© 2025 NexaHost. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></span>
-      <span>🔒 SSL Secured &nbsp; ⭐ 4.9/5 Rated</span>
-    </div>
+    <div class="footer-copy">© 2025 NexaHost. All rights reserved.</div>
   </div>
 </footer>
 
-<script src="/js/main.js"></script>
-<script src="/js/landing.js"></script>
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ── Hamburger menu toggle ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+
+  if (hamburger && mobileNav) {
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      mobileNav.classList.toggle('open');
+    });
+
+    // Close mobile nav when a link is clicked
+    const mobileLinks = mobileNav.querySelectorAll('a');
+    mobileLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('open');
+      });
+    });
+  }
+
+  /* ── Feature card scroll animations ── */
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReduced) {
+    const featureCards = document.querySelectorAll('.feature-card');
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            // Stagger animation based on card index
+            const card = entry.target;
+            const allCards = Array.from(featureCards);
+            const idx = allCards.indexOf(card);
+            const delay = idx * 60;
+
+            setTimeout(function() {
+              card.classList.add('visible');
+            }, delay);
+
+            observer.unobserve(card);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      featureCards.forEach(function(card) {
+        observer.observe(card);
+      });
+    } else {
+      // Fallback: show all cards immediately
+      featureCards.forEach(function(card) {
+        card.classList.add('visible');
+      });
+    }
+
+    /* ── Step number opacity pulse on scroll ── */
+    const stepNumbers = document.querySelectorAll('.step-number');
+
+    if (stepNumbers.length > 0 && 'IntersectionObserver' in window) {
+      const stepObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            // Opacity pulse: dim then brighten
+            el.style.opacity = '0.3';
+            setTimeout(function() {
+              el.style.opacity = '1';
+            }, 150);
+            stepObserver.unobserve(el);
+          }
+        });
+      }, {
+        threshold: 0.5
+      });
+
+      stepNumbers.forEach(function(num) {
+        stepObserver.observe(num);
+      });
+    }
+  } else {
+    // Reduced motion: show everything immediately
+    document.querySelectorAll('.feature-card').forEach(function(card) {
+      card.classList.add('visible');
+    });
+  }
+
+  /* ── Smooth scroll for anchor links ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const navHeight = 60;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+})();
+</script>
+
 </body>
 </html>
